@@ -1,8 +1,8 @@
 
 <!doctype html>
 <html lang="en">
+{% load staticfiles %}
   <head>
-    {% load staticfiles %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -28,7 +28,8 @@
       }
     </style>
     <!-- Custom styles for this template -->
-     </head>
+   
+  </head>
   <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,51 +40,44 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav ml-auto ">
                 <a class="nav-item nav-link" href="https://github.com/emmiejw">GitHub</a>
-                <a class="nav-item nav-link" href="{% url 'allblogs' %}">Blog</a>
-                <a class="nav-item nav-link" href="#">Twitter</a>
+                <a class="nav-item nav-link active" href="{% url 'allblogs'%}">Blog</a>
+                <a class="nav-item nav-link" href="">Twitter</a>
               </div>
             </div>
           </nav>
     </header>
 
 <main role="main">
-
-  <section class="jumbotron text-center">
     <div class="container">
-      <h1 class="jumbotron-heading">Hi, I'm Emmie.</h1>
-      <img src="{% static 'emmie2.jpg' %}" height="300" />
-      <br>
-      <br>
-      <p class="lead text-muted">I'm loving learning different backend frameworks and seeing what I can create and manipulate.</p>
-      <p>
-        <a href="mailto:emilyprice84@outlook.com" class="btn btn-info my-2">Email me</a>
-      </p>
-    </div>
-  </section>
-
-  <div class="album py-5 bg-light">
+        <h1 class="text-center pt-3">Welcome to my Blog</h1>
+        <br>
+        <h2>Lastest Posts:</h2>
+        <hr>  
+        <br>
         <div class="container">
-  
-          <div class="row">
-  
-            {% for job in jobs.all %}
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{{ job.image.url }}" />
-                <div class="card-body">
-                  <p class="card-text">{{ job.summary }}</p>
-                </div>
-              </div>
-            </div>
+            <div class="row">
+              {% for blog in blogs.all %}
+                 <div class="col-md-12 ">
+                    <div class="card mb-8 box-shadow border-success mb-3">
+                        <div class="card-header p-3 mb-2 bg-primary text-light">
+                            <h5 class="card-title text-center"><a href="{% url 'detail' blog.id %}"><h3 class="text-light">{{ blog.title }}</h3></a></h5>
+                        </div>
+                    <div class="text-center">
+                        <img class="card-img-top" src="{{ blog.image.url }}" style="width:300px;" />
+                        <div class="card-body">
+                            <p class="card-text">{{ blog.summary }}</p>
+                            <hr>
+                            <p class="text-dark"><b>{{ blog.pub_date_pretty }}</b></p>
+                        </div>
+                    </div>
+                    </div>
+                    <br>
+                </div>          
             {% endfor %}
-  
-  
-          </div>
+            </div>
         </div>
-      </div>
-  
 </main>
-
+<br>
 <footer class="text-muted">
   <div class="container text-center">
    <p> <i class="far fa-copyright"></i> of Emmie Wallace - Price {% now "Y" %}</p>
